@@ -53,10 +53,12 @@ button {
     cursor: pointer;
 }
 
+/* Main Shell */
+/* 桌機版：有網頁寬度，但不滿版 */
 .game-shell {
-    width: min(1120px, 100%);
+    width: min(880px, calc(100% - 32px));
     margin: 0 auto;
-    padding: 18px;
+    padding: 18px 0;
 }
 
 /* Top */
@@ -93,6 +95,7 @@ button {
     background: radial-gradient(circle at 30% 25%, #fff7bd, #e9aa52);
     font-size: 1.25rem;
     font-weight: 900;
+    flex: 0 0 auto;
 }
 
 .small-label {
@@ -105,7 +108,7 @@ button {
 h1 {
     margin: 0;
     color: #472915;
-    font-size: clamp(1.1rem, 4vw, 2rem);
+    font-size: clamp(1.3rem, 3vw, 2rem);
     line-height: 1.1;
 }
 
@@ -242,15 +245,16 @@ h1 {
 }
 
 /* Battle Scene */
+/* 桌機版：恢復比較像網頁的左右配置 */
 .battle-scene {
     position: relative;
 
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-columns: 0.85fr 1.15fr;
     grid-template-rows: auto 1fr;
     gap: 16px;
 
-    min-height: 520px;
+    min-height: 440px;
     margin-top: 16px;
     padding: 18px;
     overflow: hidden;
@@ -357,14 +361,18 @@ h1 {
     position: relative;
     z-index: 2;
 
-    min-height: 390px;
+    min-height: auto;
 }
 
 .player-area {
     align-self: end;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: flex-end;
+
+    min-height: 0;
+    padding: 0;
 }
 
 .monster-area {
@@ -381,8 +389,8 @@ h1 {
     gap: 10px;
 
     width: fit-content;
-    margin-bottom: 8px;
-    padding: 7px 10px;
+    margin: 0 auto 0;
+    padding: 6px 10px;
     border: 3px solid #9a5f34;
     border-radius: 999px;
 
@@ -445,8 +453,8 @@ h1 {
 }
 
 .hp-bar.monster {
-    width: min(420px, 100%);
-    margin-bottom: 18px;
+    width: min(100%, 360px);
+    margin-bottom: 10px;
 }
 
 .hp-bar.monster .hp-fill {
@@ -473,6 +481,54 @@ h1 {
     align-items: flex-end;
     justify-content: center;
     max-width: 100%;
+    width: 100%;
+}
+
+.knight-wrap {
+    height: 120px;
+    overflow: visible;
+}
+
+.monster-wrap {
+    height: 260px;
+    overflow: visible;
+}
+
+/* Player Emoji Weapons */
+.player-character-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+    height: 100%;
+}
+
+.player-gear {
+    position: relative;
+    z-index: 3;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    font-size: 2rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.35));
+    user-select: none;
+    pointer-events: none;
+}
+
+.player-shield {
+    transform: translateY(-22px) rotate(-8deg);
+}
+
+.player-sword {
+    transform: translateY(-24px) rotate(10deg);
 }
 
 /* CSS Knight */
@@ -481,36 +537,24 @@ h1 {
 
     width: 135px;
     height: 170px;
-    margin-top: 14px;
-    margin-left: 26px;
+    margin-top: 0;
+    margin-left: 0;
     flex: 0 0 auto;
+    transform: scale(0.62);
     transform-origin: bottom center;
 }
 
 .helmet {
     position: absolute;
-    left: 42px;
+    left: 50%;
     top: 8px;
+    transform: translateX(-50%);
 
     width: 72px;
     height: 66px;
     border-radius: 55% 55% 35% 35%;
 
     background: linear-gradient(135deg, #d8e7ec, #6f8c9b);
-    border: 4px solid #465d69;
-}
-
-.helmet::before {
-    content: "";
-    position: absolute;
-    left: -22px;
-    top: 20px;
-
-    width: 38px;
-    height: 42px;
-    border-radius: 50%;
-
-    background: #7e99a5;
     border: 4px solid #465d69;
 }
 
@@ -527,35 +571,18 @@ h1 {
     border: 4px solid #214c7e;
 }
 
+/* 原本 CSS 畫的劍不使用，改用 emoji ⚔️ 放在角色右側 */
 .sword {
-    position: absolute;
-    left: 112px;
-    top: 72px;
-
-    width: 10px;
-    height: 100px;
-
-    background: linear-gradient(90deg, #e8eef2, #9faab1);
-    border-radius: 999px;
-    transform: rotate(40deg);
-    transform-origin: top;
+    display: none;
 }
 
 .sword::before {
-    content: "";
-    position: absolute;
-    left: -15px;
-    top: 12px;
-
-    width: 40px;
-    height: 8px;
-    border-radius: 999px;
-
-    background: #8b5a2f;
+    display: none;
 }
 
 /* CSS Monster */
-.monster {
+/* 注意：避免影響 <div class="hp-bar monster">，所以這裡使用精準選擇器 */
+.monster-wrap>.monster {
     position: relative;
 
     width: 310px;
@@ -571,6 +598,7 @@ h1 {
         0 18px 0 rgba(44, 70, 33, 0.25),
         0 25px 40px rgba(0, 0, 0, 0.3);
     flex: 0 0 auto;
+    transform: scale(0.82);
     transform-origin: bottom center;
 }
 
@@ -687,7 +715,7 @@ h1 {
 
 .input-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 14px;
 }
 
@@ -725,7 +753,7 @@ h1 {
     display: block;
 
     color: #3f2818;
-    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
     word-break: break-word;
 }
 
@@ -809,36 +837,52 @@ h1 {
     }
 }
 
-/* Responsive */
+/* Tablet */
 @media (max-width: 900px) {
+    .game-shell {
+        width: min(720px, calc(100% - 28px));
+    }
+
     .battle-scene {
         grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        min-height: auto;
     }
 
     .monster-area {
         order: 2;
+        align-self: center;
+        justify-content: center;
     }
 
     .player-area {
         order: 3;
-    }
-
-    .input-grid,
-    .result-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .player-area {
-        align-items: flex-start;
+        align-self: center;
+        justify-content: flex-start;
     }
 
     .monster-wrap {
-        width: 100%;
+        height: 245px;
+    }
+
+    .monster-wrap>.monster {
+        transform: scale(0.76);
+    }
+
+    .input-grid,
+    .input-grid.two-cols {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .result-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* Mobile */
 @media (max-width: 640px) {
     .game-shell {
+        width: min(430px, 100%);
         padding: 12px;
     }
 
@@ -864,13 +908,26 @@ h1 {
         flex-direction: column;
     }
 
+    .battle-scene {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 12px;
+
+        min-height: auto;
+        margin-top: 14px;
+        padding: 14px;
+        border-radius: 26px;
+    }
+
     .attack-timer {
         flex-wrap: wrap;
+        width: 100%;
+        padding: 10px;
         border-radius: 22px;
     }
 
     .timer-content {
-        flex-basis: calc(50% - 40px);
+        flex: 1 1 calc(50% - 50px);
         min-width: 0;
     }
 
@@ -879,21 +936,12 @@ h1 {
         padding-left: 0;
     }
 
+    .timer-content strong {
+        font-size: 1rem;
+    }
+
     .timer-btn {
         flex: 1 1 100%;
-    }
-
-    .input-grid,
-    .input-grid.two-cols,
-    .result-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .battle-scene {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 14px;
-        min-height: auto;
     }
 
     .character-card {
@@ -907,29 +955,49 @@ h1 {
         width: 100%;
     }
 
+    .player-area {
+        justify-content: flex-start;
+    }
+
     .shield-row {
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto 0;
     }
 
     .knight {
-        margin-left: 0;
-        transform: scale(0.82);
+        transform: scale(0.62);
     }
 
     .knight-wrap {
-        height: 150px;
+        height: 120px;
         width: 100%;
         justify-content: center;
     }
 
-    .monster {
-        transform: scale(0.82);
+    .player-character-row {
+        gap: 6px;
+    }
+
+    .player-gear {
+        width: 38px;
+        height: 38px;
+        font-size: 1.85rem;
+    }
+
+    .player-shield {
+        transform: translateY(-20px) rotate(-8deg);
+    }
+
+    .player-sword {
+        transform: translateY(-22px) rotate(10deg);
+    }
+
+    .monster-wrap>.monster {
+        transform: scale(0.72);
     }
 
     .monster-wrap {
         width: 100%;
-        height: 245px;
+        height: 220px;
         overflow: visible;
     }
 
@@ -937,9 +1005,34 @@ h1 {
         width: min(100%, 360px);
         margin-bottom: 8px;
     }
+
+    .input-grid,
+    .input-grid.two-cols,
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bottom-panel {
+        margin-top: 14px;
+        padding: 14px;
+        border-radius: 26px;
+    }
+
+    .result-card strong {
+        font-size: clamp(1.25rem, 6vw, 1.75rem);
+    }
+
+    h1 {
+        font-size: clamp(1.1rem, 7vw, 1.75rem);
+    }
 }
 
 @media (max-width: 420px) {
+    .game-shell {
+        width: 100%;
+        padding: 12px;
+    }
+
     .battle-scene {
         padding: 10px;
         border-radius: 22px;
@@ -964,10 +1057,28 @@ h1 {
     }
 
     .knight-wrap {
-        height: 130px;
+        height: 110px;
     }
 
-    .monster {
+    .player-character-row {
+        gap: 4px;
+    }
+
+    .player-gear {
+        width: 34px;
+        height: 34px;
+        font-size: 1.65rem;
+    }
+
+    .player-shield {
+        transform: translateY(-18px) rotate(-8deg);
+    }
+
+    .player-sword {
+        transform: translateY(-20px) rotate(10deg);
+    }
+
+    .monster-wrap>.monster {
         transform: scale(0.68);
     }
 
@@ -985,7 +1096,11 @@ h1 {
 }
 
 @media (max-width: 360px) {
-    .monster {
+    .game-shell {
+        padding: 10px;
+    }
+
+    .monster-wrap>.monster {
         transform: scale(0.62);
     }
 
@@ -998,6 +1113,34 @@ h1 {
     }
 
     .knight-wrap {
-        height: 120px;
+        height: 102px;
+    }
+
+    .player-character-row {
+        gap: 2px;
+    }
+
+    .player-gear {
+        width: 30px;
+        height: 30px;
+        font-size: 1.45rem;
+    }
+
+    .player-shield {
+        transform: translateY(-16px) rotate(-8deg);
+    }
+
+    .player-sword {
+        transform: translateY(-18px) rotate(10deg);
+    }
+
+    .round-badge {
+        width: 50px;
+        height: 50px;
+        font-size: 1.1rem;
+    }
+
+    h1 {
+        font-size: 1.15rem;
     }
 }
