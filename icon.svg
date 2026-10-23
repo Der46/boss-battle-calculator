@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+    <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3a2d44" />
+            <stop offset="1" stop-color="#161019" />
+        </linearGradient>
+        <radialGradient id="glow" cx="0.5" cy="0.3" r="0.6">
+            <stop offset="0" stop-color="#ffde80" stop-opacity="0.35" />
+            <stop offset="1" stop-color="#ffde80" stop-opacity="0" />
+        </radialGradient>
+        <linearGradient id="slime" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#a6ee5c" />
+            <stop offset="0.6" stop-color="#80d83f" />
+            <stop offset="1" stop-color="#3d962d" />
+        </linearGradient>
+        <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7cc0ff" />
+            <stop offset="1" stop-color="#2d6fc4" />
+        </linearGradient>
+        <linearGradient id="clock" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffe58a" />
+            <stop offset="1" stop-color="#f0a845" />
+        </linearGradient>
+    </defs>
+
+    <!-- Background tile -->
+    <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#bg)" stroke="#6e4529" stroke-width="16" />
+    <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#glow)" />
+
+    <!-- Ground shadow -->
+    <ellipse cx="256" cy="420" rx="150" ry="22" fill="#000" opacity="0.35" />
+
+    <!-- Slime monster -->
+    <path d="M100 410
+             C 84 330, 104 200, 190 150
+             C 236 122, 288 122, 330 150
+             C 410 200, 430 330, 412 410
+             C 380 426, 360 400, 336 414
+             C 310 428, 290 404, 256 416
+             C 222 428, 204 404, 176 416
+             C 150 428, 126 404, 100 410 Z"
+          fill="url(#slime)" stroke="#2f6f27" stroke-width="10" stroke-linejoin="round" />
+    <!-- Highlights -->
+    <ellipse cx="170" cy="210" rx="26" ry="14" fill="#fff" opacity="0.35" transform="rotate(-35 170 210)" />
+    <circle cx="372" cy="300" r="14" fill="#3d962d" opacity="0.5" />
+    <circle cx="142" cy="340" r="10" fill="#3d962d" opacity="0.5" />
+
+    <!-- Eyes -->
+    <circle cx="256" cy="215" r="46" fill="#fff" stroke="#3c7c33" stroke-width="9" />
+    <circle cx="262" cy="222" r="18" fill="#1e1624" />
+    <circle cx="268" cy="214" r="6" fill="#fff" />
+
+    <circle cx="186" cy="290" r="30" fill="#fff" stroke="#3c7c33" stroke-width="8" />
+    <circle cx="190" cy="295" r="12" fill="#1e1624" />
+
+    <circle cx="326" cy="290" r="30" fill="#fff" stroke="#3c7c33" stroke-width="8" />
+    <circle cx="330" cy="295" r="12" fill="#1e1624" />
+
+    <!-- Mouth -->
+    <path d="M214 344 Q 256 384 298 344 Z" fill="#236326" opacity="0.7" />
+
+    <!-- Shield badge (bottom-left) -->
+    <path d="M86 300 L 140 280 L 194 300 L 194 350 C 194 392, 166 414, 140 426 C 114 414, 86 392, 86 350 Z"
+          fill="url(#shield)" stroke="#44291b" stroke-width="9" stroke-linejoin="round" />
+    <path d="M140 300 L 140 410" stroke="#fff2c7" stroke-width="8" opacity="0.6" />
+    <path d="M104 336 L 176 336" stroke="#fff2c7" stroke-width="8" opacity="0.6" />
+
+    <!-- Timer badge (top-right) -->
+    <circle cx="390" cy="122" r="62" fill="url(#clock)" stroke="#44291b" stroke-width="9" />
+    <rect x="378" y="44" width="24" height="18" rx="4" fill="#44291b" />
+    <circle cx="390" cy="122" r="44" fill="#fff2c7" />
+    <path d="M390 122 L 390 92" stroke="#44291b" stroke-width="9" stroke-linecap="round" />
+    <path d="M390 122 L 414 136" stroke="#ff5a45" stroke-width="9" stroke-linecap="round" />
+    <circle cx="390" cy="122" r="7" fill="#44291b" />
+</svg>

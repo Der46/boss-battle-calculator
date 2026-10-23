@@ -1,0 +1,16 @@
+{
+    "name": "Monster Battle Warning Tool",
+    "short_name": "Boss Battle",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#1e1624",
+    "theme_color": "#1e1624",
+    "icons": [
+        {
+            "src": "icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ]
+}
